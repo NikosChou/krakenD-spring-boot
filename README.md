@@ -29,7 +29,7 @@ docker-compose up
 We are expecting the same behavior when the application is running behind a krakenD
 with the only difference that the KrakenD will follow the Location response header.
 
-##1) Running behind KrakenD
+## 1) Running behind KrakenD
 Setting the Host header so its more obvious where the request is coming
 ####request:
 ``
@@ -65,7 +65,7 @@ The X-Forwarded-host is identifying the original host `['x-forwarded-host': 'ser
 KrakenD follows the location response header `http://spring-boot-local:8080/index` and return a 200 response.
 
 
-##2) Running behind KrakenD and make spring boot believe that is running on K8s
+## 2) Running behind KrakenD and make spring boot believe that is running on K8s
 Setting the property `spring.main.cloud-platform=kubernetes` 
 
 ``
@@ -94,7 +94,7 @@ setting the redirect to `http://server.prod:8080/index` and KrakenD fails to fol
 
 When is running in K8s spring use the X-Forwarded-host to redirect, this is the default behavior. See (https://spring.getdocs.org/en-US/spring-boot-docs/howto/howto-embedded-web-servers.html#howto-use-tomcat-behind-a-proxy-server)
 
-##3) Running behind KrakenD & change forward header strategy
+## 3) Running behind KrakenD & change forward header strategy
 Setting the properties `spring.main.cloud-platform=kubernetes` `server.forward-headers-strategy=none`
 
 ``
