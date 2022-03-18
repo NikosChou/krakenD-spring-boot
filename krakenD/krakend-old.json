@@ -1,0 +1,74 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 2,
+  "extra_config": {
+    "telemetry/logging": {
+      "level": "DEBUG",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true,
+      "format": "default"
+    }
+  },
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "testing",
+  "port": 9000,
+  "endpoints": [
+    {
+      "endpoint": "/local/redirect-to-index",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/redirect-to-index",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": false,
+          "host": [
+            "spring-boot-local:8080"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/k8s-error/redirect-to-index",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/redirect-to-index",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": false,
+          "host": [
+            "spring-boot-k8s-error:8080"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/k8s/redirect-to-index",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/redirect-to-index",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": false,
+          "host": [
+            "spring-boot-k8s:8080"
+          ]
+        }
+      ]
+    }
+  ]
+}

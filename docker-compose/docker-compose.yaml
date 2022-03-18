@@ -5,6 +5,13 @@ services:
     container_name: "krakend"
     ports:
       - "9000:9000"
+  krakend-old:
+    build:
+      context: ../krakenD
+      dockerfile: Dockerfile-old
+    container_name: "krakend-old"
+    ports:
+      - "9001:9000"
   spring-boot-local:
     build: ../
     container_name: "spring-boot-local"
