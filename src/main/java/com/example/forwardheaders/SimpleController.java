@@ -26,16 +26,19 @@ public class SimpleController {
   @SneakyThrows
   @GetMapping("/redirect-to-index")
   public void redirect(HttpServletResponse response, @RequestHeader Map<String, String> headers) {
-    var allHeaders =
-        headers.entrySet().stream()
-            .map(e -> "['" + e.getKey() + "': '" + e.getValue() + "']")
-            .collect(Collectors.joining("\n"));
+    var allHeaders = headersToString(headers);
 
-    log.traceEntry("redirect, headers: \n{}", allHeaders);
+    log.traceEntry("redirect, headers: \n{}\n", allHeaders);
 
     response.sendRedirect("index");
 
     log.info("Location header: '{}'", response.getHeader("location"));
     log.traceExit("redirect");
+  }
+
+  private String headersToString(Map<String, String> headers) {
+    return headers.entrySet().stream()
+      .map(e -> "['" + e.getKey() + "': '" + e.getValue() + "']")
+      .collect(Collectors.joining("\n"));
   }
 }
